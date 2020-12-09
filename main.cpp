@@ -97,34 +97,22 @@ void update_snake_coordinates(int snake[], int snl, int dxdy[]){
 // 4e partie : game over
 
 bool snake_eats_itself(int* snake, int nx, int ny, int snl, int dxdy[]){
-
+  return true;
 }
 
-bool verifyBorder(int snake[], int nx, int ny, int snl, int dxdy[]){
-
-  // // 1ere partie : vérifier que l'on évite les bords
-  // if (dxdy[0]== 1 && snake[snl-1] == nx-1) {
-  //   return false;
-  // }
-  // if (dxdy[0]== -1 && snake[snl-1] == 0) {
-  //   return false;
-  // }
-  // if (dxdy[1]== 1 && snake[snl+SNAKE_LEN-1] == ny-1) {
-  //   return false;
-  // }
-  // if (dxdy[1]== -1 && snake[snl+SNAKE_LEN-1] == 0) {
-  //   return false;
-  // }
-
-  // // 2nde partie : vérifier que le serpent ne se mord pas la queue
-  // // idée : on regarde si la dernière case + dxdy fonce sur le serpent (i.e. vaut une des autres cases)
-  // int test_1 = snake[snl-1] + dxdy[0];
-  // int test_2 = snake[snl-1+SNAKE_LEN] + dxdy[1];
-  // for (int i=0; i<snl-1; i++) {
-  //   if (snake[i] == test_1 && snake[i+SNAKE_LEN] == test_2) {
-  //     return false;
-  //   }
-  // si aucun problème, on est bon
+bool verifyBorder(int snake[], int nx, int ny, int snl, int dxdy[]){  
+  if (dxdy[0] == 1 && snake[snl-1] == nx - 1) {
+    return false;
+  }
+  if (dxdy[0] == -1 && snake[snl-1] == 0) {
+    return false;
+  }
+  if (dxdy[1] == 1 && snake[SNAKE_LEN + snl - 1] == ny-1) {
+    return false;
+  }
+  if (dxdy[1] == -1 && snake[SNAKE_LEN + snl - 1] == 0) {
+    return false;
+  }
   return true;
 }
 
