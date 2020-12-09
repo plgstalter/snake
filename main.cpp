@@ -14,9 +14,11 @@ void backgroundSetup(const int nx, const int ny, int background[]){
   // or dans `display.cpp`, les '#' correspondent à '1'
   for (int i=0; i<nx; i++) {
     background[i] = 1;
-    background[nx*ny-i] = 1;
-    background[i*ny] = 1;
-    background[i*ny+nx-1] = 1;
+    background[(ny-1)*nx + i] = 1;
+  }
+  for (int j=0; j<ny; j++){
+    background[j*nx] = 1;
+    background[j*nx+nx-1] = 1;
   }
 }
 
@@ -117,7 +119,7 @@ void startGame(const int& lap, const int& nx, const int& ny, int& snl, int* snak
 
     createFood( bg, food, nx, ny );
 
-    while( true ){
+    while( true ) {
         internal::frameSleep(lap);
         if( internal::keyEvent() ){
             std::cin >> key; 
@@ -155,11 +157,10 @@ int main(){
         background[i] = -1;
     }
     int snake[2*SNAKE_LEN];
-
     backgroundSetup(nx, ny, background);
     setupSnake(snake, snake_len, nx, ny);
-
-
-    startGame(lap, nx, ny, snake_len, snake, background);
-
+    add_snake(snake, background, snake_len, nx, ny);
+    //printFrame(nx, ny, background);
+    //startGame(lap, nx, ny, snake_len, snake, background);
+    return 0;
 }
