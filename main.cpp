@@ -36,6 +36,15 @@ void remove_snake(int* snake, int bg[], int snl, const int nx, const int ny){
   }
 }
 
+void snakegrowth(int* snake, int snl, int dxdy[]) {
+  for (int i=0; i<snl; i++) {
+    snake[snl - i] = snake[snl - i - 1];
+    snake[SNAKE_LEN + snl - i] = snake[SNAKE_LEN + snl - i - 1];
+  }
+  snake[0] = snake[1] + dxdy[0];
+  snake[SNAKE_LEN] = snake[SNAKE_LEN + 1] + dxdy[1];
+}
+
 void snake_movement(char key, int dxdy[]){
   // on considère que l'on joue avec les touches a, z, e et s sur un clavier AZERTY
   if (key == 'a') {
@@ -48,11 +57,11 @@ void snake_movement(char key, int dxdy[]){
   }
   if (key == 'z') {
     dxdy[0] = 0;
-    dxdy[1] = 1;
+    dxdy[1] = -1;
   }
   if (key == 's') {
     dxdy[0] = 0;
-    dxdy[1] = -1;
+    dxdy[1] = 1;
   }
 }
 
@@ -133,6 +142,7 @@ void startGame(const int& lap, const int& nx, const int& ny, int& snl, int* snak
         bool eat = eatFood(food, snake);
         if(eat){
             createFood(bg, food, nx, ny);
+            snakegrowth(snake, snl, dxdy);
             snl++;
         }
         update_snake_coordinates(snake, snl, dxdy);
