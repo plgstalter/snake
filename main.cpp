@@ -97,13 +97,15 @@ void update_snake_coordinates(int snake[], int snl, int dxdy[]){
 // 4e partie : game over
 
 bool snake_eats_itself(int* snake, int nx, int ny, int snl, int dxdy[]){
-  int test_x = snake[snl - 1];
-  int test_y = snake[SNAKE_LEN + snl - 1];
-  for (int i=0; i<snl-1; i++) {
-    if (test_x == snake[i] && test_y == snake[SNAKE_LEN + i]) {
-      return false;
+  if (snl > 3) {
+    int test_x = snake[snl - 1];
+    int test_y = snake[SNAKE_LEN + snl - 1];
+    for (int i=0; i<snl-1; i++) {
+      if (test_x == snake[i] && test_y == snake[SNAKE_LEN + i]) {
+        return false;
+      }
     }
-  }
+  } 
   return true;
 }
 
