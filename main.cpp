@@ -144,6 +144,7 @@ void startGame(const int& lap, const int& nx, const int& ny, int& snl, int* snak
         backgroundClear();
         add_snake(snake, bg, snl, nx, ny );
         printFrame(nx, ny, bg);
+        print_score(snl);
         remove_snake(snake, bg, snl, nx, ny);
         bool out_1 = verifyBorder(snake, nx, ny, snl, dxdy);
         bool out_2 = snake_eats_itself(snake, nx, ny, snl, dxdy);
@@ -158,11 +159,8 @@ void startGame(const int& lap, const int& nx, const int& ny, int& snl, int* snak
             snl++;
         }
         update_snake_coordinates(snake, snl, dxdy);
-
     }
 }
-
-
 
 int main(){
     const int nx = 50;
