@@ -89,14 +89,10 @@ bool verifyBorder(int snake[], int nx, int ny, int snl){
 }
 
 void setupSnake(int snake[], int len, int nx, int ny){
-  int sx = rand()% nx - 2;
-  int sy = rand()% ny - 2;
-  sx = sx + 1+len;
-  sy++;
   // le + 1 est pour éviter d'être sur la frontière ; idem pour le -2 (dans l'autre sens)
-  snake[0] = sx;
-  snake[SNAKE_LEN] = sy;
-  for (int i=0; i < (len - 1); i++) {
+  snake[0] = 8;
+  snake[SNAKE_LEN] = ny-10;
+  for (int i=1; i < len; i++) {
     // on initialise un serpent horizontal
     snake[i] = snake[i-1] - 1;
     snake[SNAKE_LEN+i] = snake[SNAKE_LEN+i-1]; 
@@ -160,7 +156,6 @@ int main(){
     backgroundSetup(nx, ny, background);
     setupSnake(snake, snake_len, nx, ny);
     add_snake(snake, background, snake_len, nx, ny);
-    //printFrame(nx, ny, background);
-    //startGame(lap, nx, ny, snake_len, snake, background);
+    startGame(lap, nx, ny, snake_len, snake, background);
     return 0;
 }
