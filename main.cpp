@@ -66,19 +66,19 @@ void snakegrowth(int* snake, int snl, int dxdy[]) {
 
 void snake_movement(char key, int dxdy[]){
   // on considère que l'on joue avec les touches a, z, e et s sur un clavier AZERTY
-  if (key == 'a') {
+  if (key == 'a' && dxdy[0] == 0) {
     dxdy[0] = -1;
     dxdy[1] = 0;
   }
-  if (key == 'e') {
+  if (key == 'e' && dxdy[0] == 0) {
     dxdy[0] = 1;
     dxdy[1] = 0;
   }
-  if (key == 'z') {
+  if (key == 'z' && dxdy[1] == 0) {
     dxdy[0] = 0;
     dxdy[1] = -1;
   }
-  if (key == 's') {
+  if (key == 's' && dxdy[1] == 0) {
     dxdy[0] = 0;
     dxdy[1] = 1;
   }
@@ -146,7 +146,7 @@ void startGame(const int& lap, const int& nx, const int& ny, int& snl, int* snak
         bool out_1 = verifyBorder(snake, nx, ny, snl, dxdy);
         bool out_2 = snake_eats_itself(snake, nx, ny, snl, dxdy);
         if (!(out_1 && out_2)) {
-            std::cerr << "" << std::endl;
+            std::cerr << "game over" << std::endl;
             exit(1);
         }
         bool eat = eatFood(food, snake);
